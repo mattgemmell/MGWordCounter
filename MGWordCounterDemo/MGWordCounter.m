@@ -217,8 +217,9 @@ NSString *MGWordCounterDidUpdateWordCountNotification = @"MGWordCounterDidUpdate
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context
 {
-    // We're Key-Value Observing changes to the OPERATION_FINISHED_KEY key-path of each operation.
-    // When an operation finishes, this method is called.
+    // We're Key-Value Observing changes to the QUEUE_COUNT_KEY key-path of our operationQueue.
+    // When the number of operations in the queue changes, this method is called.
+    // Operation Queues remove completed operations, hence this means the operation finished.
     
     MGWordCountOperation *countOperation = (MGWordCountOperation *)object;
     if (object && [keyPath isEqualToString:OPERATION_FINISHED_KEY]) {
@@ -249,6 +250,13 @@ NSString *MGWordCounterDidUpdateWordCountNotification = @"MGWordCounterDidUpdate
                             });
                         }
                         
+                        //Update Block
+                        
+                        if (self.counterUpdateBlock)
+                        {
+                            self.counterUpdateBlock(_wordCount,selectionCount);
+                        }
+                        
                         // Send notification.
                         NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
                                               [NSNumber numberWithInteger:relevantCount], MGWordCountKey,
@@ -277,6 +285,11 @@ NSString *MGWordCounterDidUpdateWordCountNotification = @"MGWordCounterDidUpdate
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [self.delegate wordCounter:self updatedCount:_wordCount forSelection:NO];
                                 });
+                            }
+                            // Update Block
+                            if (self.counterUpdateBlock)
+                            {
+                                self.counterUpdateBlock(_wordCount,NO);
                             }
                             
                             // Send notification.

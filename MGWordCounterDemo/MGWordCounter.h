@@ -61,6 +61,7 @@
 - (void)updateCount; // Updates count immediately, via full recount. You shouldn't need to call this; updates happen automatically.
 
 @property (nonatomic, weak) id <MGWordCounterDelegate> delegate; // Delegate for this object.
+@property (nonatomic, copy) void (^counterUpdateBlock)(NSInteger, BOOL); // Block object called during update
 #if TARGET_OS_IPHONE
 @property (nonatomic, strong) UITextView *textView; // This counter's associated text-view.
 #else
