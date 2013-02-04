@@ -1,0 +1,56 @@
+10
+
+dir
+0
+http://source.mattgemmell.com/cocoa/RoundedBox/MGWordCounterDemo/MGWordCounterDemo/en.lproj
+
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b5841adc-d70b-0410-a105-a463d4995041
+
+InfoPlist.strings
+file
+
+
+
+add
+
+MLGDocument.xib
+file
+
+
+
+add
+
+Credits.rtf
+file
+
+
+
+add
+
+MainMenu.xib
+file
+
+
+
+add
+
