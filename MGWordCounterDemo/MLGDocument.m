@@ -44,6 +44,9 @@
     // Configure word-counter.
     wordCounter = [MGWordCounter wordCounterForTextView:self.textview];
     wordCounter.delegate = self;
+    wordCounter.counterUpdateBlock = ^(NSInteger count, BOOL selectionOnly){
+        //NSLog(@"Word count updated: %ld words (for %@)", (long)count, ((selectionOnly) ? @"selection" : @"full text"));
+    };
     self.textview.delegate = wordCounter;
     [wordCounter startCounting]; // Asynchronous; will return immediately and notify later.
 }
