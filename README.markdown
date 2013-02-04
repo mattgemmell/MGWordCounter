@@ -66,7 +66,7 @@ Briefly, you create an MGWordCounter object by initialising it with a suitable N
     textview.delegate = wordCounter;
     [wordCounter startCounting];
 
-MGWordCounter will then post **notifications** (and call a **delegate method**, if you've given it a delegate) whenever the word-count changes.
+MGWordCounter will then post **notifications** (and call a **delegate method**, if you've given it a delegate) whenever the word-count changes. You can also specify a **block** to be executed.
 
 
 ## Does it need to be my Text View's delegate?
